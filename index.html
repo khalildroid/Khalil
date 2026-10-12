@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khalil Itto | Lo-Fi Dev</title>
+    <title>Khalil Itto | Web Dev & Content Creator</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Load Font Awesome -->
@@ -30,6 +30,7 @@
                             green: '#aacc00', // Sage Green
                             brown: '#d4a373', // Wood/Coffee
                             dark: '#2b2d42', // Darker text
+                            pink: '#ff4d6d'  // Social/Creator accent
                         }
                     },
                     backgroundImage: {
@@ -54,23 +55,12 @@
             }
         }
     </script>
-    
     <style>
         /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #fdf6e3;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #d4a373;
-            border-radius: 5px;
-            border: 2px solid #fdf6e3;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #ff9f1c;
-        }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #fdf6e3; }
+        ::-webkit-scrollbar-thumb { background: #d4a373; border-radius: 5px; border: 2px solid #fdf6e3; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff9f1c; }
 
         /* Lo-Fi Card Style */
         .lofi-card {
@@ -86,22 +76,15 @@
         }
 
         /* Interactive Timeline Item */
-        .timeline-item {
-            transition: all 0.3s ease;
-        }
-        .timeline-item:hover {
-            transform: translateX(10px);
-        }
+        .timeline-item { transition: all 0.3s ease; }
+        .timeline-item:hover { transform: translateX(10px); }
         .timeline-item:hover .timeline-pin {
-            transform: scale(1.3);
+            transform: translate(-50%, -5px) scale(1.2);
             background-color: #ff9f1c;
         }
 
         /* Certificate Card Animation */
-        .cert-card {
-            transition: all 0.3s ease;
-            cursor: default;
-        }
+        .cert-card { transition: all 0.3s ease; cursor: default; }
         .cert-card:hover {
             transform: translateY(-5px);
             box-shadow: 6px 6px 0px #d4a373;
@@ -118,23 +101,19 @@
         }
 
         /* Skill Tag Animation */
-        .skill-tag {
-            transition: all 0.2s ease;
-            cursor: default;
-        }
+        .skill-tag { transition: all 0.2s ease; cursor: default; display: inline-block; }
         .skill-tag:hover {
-            transform: scale(1.1) rotate(2deg);
+            transform: scale(1.1) rotate(2deg) !important; /* Force override */
             background-color: #ff9f1c;
             color: white;
             border-color: #2b2d42;
             box-shadow: 4px 4px 0px #2b2d42;
+            z-index: 10;
+            position: relative;
         }
 
         /* Language Bar Animation */
-        .lang-bar-fill {
-            width: 0%; 
-            transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
-        }
+        .lang-bar-fill { width: 0%; transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1); }
 
         /* Polaroid Gallery Style */
         .polaroid {
@@ -144,16 +123,18 @@
             transform: rotate(var(--rotation));
             transition: all 0.3s ease;
             cursor: zoom-in;
+            position: relative;
         }
         .polaroid:hover {
-            transform: scale(1.05) rotate(0deg) !important;
-            z-index: 10;
+            transform: scale(1.1) rotate(0deg) !important;
+            z-index: 20;
             box-shadow: 5px 10px 15px rgba(0,0,0,0.2);
         }
         .polaroid img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border: 1px solid #eee;
         }
 
         /* Tape Effect */
@@ -190,16 +171,11 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-        .float-anim {
-            animation: float 4s ease-in-out infinite;
-        }
+        .float-anim { animation: float 4s ease-in-out infinite; }
 
-        /* Sidebar Link Active */
-        .nav-link.active {
-            color: #ff9f1c;
-            font-weight: bold;
-            text-decoration: underline;
-            text-decoration-style: wavy;
+        /* Social Stat Box */
+        .stat-box {
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.02) 10px, rgba(0,0,0,0.02) 20px);
         }
     </style>
 </head>
@@ -210,35 +186,36 @@
         <i class="fas fa-bars text-xl"></i>
     </button>
 
-    <!-- Sidebar Navigation (Notebook Style) -->
+    <!-- Sidebar Navigation -->
     <aside id="sidebar" class="fixed md:sticky top-0 h-screen w-64 bg-lofi-paper border-r-4 border-lofi-brown flex-shrink-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto flex flex-col justify-between p-6 shadow-xl">
         <div class="absolute top-0 right-0 h-full w-8 bg-repeat-y" style="background-image: radial-gradient(#d4a373 30%, transparent 31%); background-size: 20px 20px; background-position: 10px 0;"></div>
         
         <div>
-            <div class="text-center mb-8">
+            <div class="text-center mb-8 pr-4">
                 <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-lofi-dark relative bg-white">
-                    <img src="khalidr.jpg" alt="Khalil Itto" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/d4a373?text=Profile+Pic';">
+                    <img src="khalidr.jpg" alt="Khalil Itto" class="w-full h-full object-cover">
                 </div>
                 <h2 class="text-3xl font-hand font-bold text-lofi-dark">Khalil Itto</h2>
-                <p class="text-sm text-lofi-text mt-1 font-hand text-lg">Web Dev & Cozy Vibes</p>
+                <p class="text-sm text-lofi-text mt-1 font-hand text-lg">Tech Educator & Creator</p>
             </div>
 
-            <nav>
+            <nav class="pr-4">
                 <ul class="space-y-4 font-hand text-xl">
-                    <li><a href="#home" class="nav-link flex items-center gap-3 hover:text-lofi-accent transition-colors"><i class="fas fa-home w-6 text-center"></i> Home</a></li>
-                    <li><a href="#about" class="nav-link flex items-center gap-3 hover:text-lofi-accent transition-colors"><i class="fas fa-user w-6 text-center"></i> About Me</a></li>
-                    <li><a href="#skills" class="nav-link flex items-center gap-3 hover:text-lofi-accent transition-colors"><i class="fas fa-pencil-ruler w-6 text-center"></i> Skills</a></li>
-                    <li><a href="#experience" class="nav-link flex items-center gap-3 hover:text-lofi-accent transition-colors"><i class="fas fa-coffee w-6 text-center"></i> Journey</a></li>
-                    <li><a href="#certificates" class="nav-link flex items-center gap-3 hover:text-lofi-accent transition-colors"><i class="fas fa-certificate w-6 text-center"></i> Certs</a></li>
-                    <li><a href="#gallery" class="nav-link flex items-center gap-3 hover:text-lofi-accent transition-colors"><i class="fas fa-camera-retro w-6 text-center"></i> Snaps</a></li>
-                    <li><a href="#contact" class="nav-link flex items-center gap-3 hover:text-lofi-accent transition-colors"><i class="fas fa-paper-plane w-6 text-center"></i> Contact</a></li>
+                    <li><a href="#home" class="flex items-center gap-3 hover:text-lofi-accent transition-colors"><i class="fas fa-home w-6 text-center"></i> Home</a></li>
+                    <li><a href="#about" class="flex items-center gap-3 hover:text-lofi-accent transition-colors"><i class="fas fa-user w-6 text-center"></i> About Me</a></li>
+                    <li><a href="#creator" class="flex items-center gap-3 hover:text-lofi-pink transition-colors"><i class="fas fa-bullhorn w-6 text-center"></i> Partnerships</a></li>
+                    <li><a href="#skills" class="flex items-center gap-3 hover:text-lofi-accent transition-colors"><i class="fas fa-pencil-ruler w-6 text-center"></i> Skills</a></li>
+                    <li><a href="#experience" class="flex items-center gap-3 hover:text-lofi-accent transition-colors"><i class="fas fa-coffee w-6 text-center"></i> Journey</a></li>
+                    <li><a href="#certificates" class="flex items-center gap-3 hover:text-lofi-accent transition-colors"><i class="fas fa-certificate w-6 text-center"></i> Certs</a></li>
+                    <li><a href="#gallery" class="flex items-center gap-3 hover:text-lofi-accent transition-colors"><i class="fas fa-camera-retro w-6 text-center"></i> Snaps</a></li>
+                    <li><a href="#contact" class="flex items-center gap-3 hover:text-lofi-accent transition-colors"><i class="fas fa-paper-plane w-6 text-center"></i> Contact</a></li>
                 </ul>
             </nav>
         </div>
 
-        <div class="mt-6 bg-lofi-bg p-4 rounded-lg border-2 border-lofi-dark relative overflow-hidden">
+        <div class="mt-6 bg-lofi-bg p-4 rounded-lg border-2 border-lofi-dark relative overflow-hidden mr-4">
             <div class="flex items-center gap-3 mb-2">
-                <div class="w-10 h-10 bg-lofi-accent rounded-full flex items-center justify-center text-white animate-spin-slow"><i class="fas fa-music"></i></div>
+                <div class="w-10 h-10 bg-lofi-accent rounded-full flex items-center justify-center text-white animate-spin-slow" style="animation-duration: 4s;"><i class="fas fa-music"></i></div>
                 <div>
                     <p class="text-xs font-bold font-hand text-lofi-dark">Now Playing</p>
                     <p class="text-xs text-lofi-text truncate w-24">Lofi Beats to Code To</p>
@@ -247,71 +224,59 @@
             <div class="h-1 bg-gray-300 rounded-full overflow-hidden">
                 <div class="h-full bg-lofi-accent w-1/2"></div>
             </div>
-            <div class="flex justify-center gap-4 mt-2 text-lofi-dark text-xs">
-                <i class="fas fa-backward cursor-pointer hover:text-lofi-accent"></i>
-                <i class="fas fa-pause cursor-pointer hover:text-lofi-accent"></i>
-                <i class="fas fa-forward cursor-pointer hover:text-lofi-accent"></i>
-            </div>
         </div>
     </aside>
 
     <main class="flex-1 p-4 md:p-10 relative overflow-x-hidden">
         
-        <section id="home" class="min-h-[80vh] flex flex-col justify-center items-start relative mb-20">
-            <div class="absolute top-10 right-10 opacity-20 text-lofi-green float-anim" style="font-size: 8rem;">
-                <i class="fas fa-cloud"></i>
-            </div>
-            <div class="absolute bottom-10 right-20 opacity-20 text-lofi-accent float-anim" style="animation-delay: 1s; font-size: 6rem;">
-                <i class="fas fa-moon"></i>
-            </div>
+        <!-- Home / Hero Section -->
+        <section id="home" class="min-h-[85vh] flex flex-col justify-center items-start relative mb-20">
+            <div class="absolute top-10 right-10 opacity-20 text-lofi-green float-anim" style="font-size: 8rem;"><i class="fas fa-cloud"></i></div>
+            <div class="absolute bottom-10 right-20 opacity-20 text-lofi-accent float-anim" style="animation-delay: 1s; font-size: 6rem;"><i class="fas fa-moon"></i></div>
 
             <div class="max-w-3xl relative z-10">
                 <div class="inline-block bg-lofi-green text-white px-3 py-1 rounded-full border-2 border-lofi-dark mb-4 font-hand text-lg shadow-[4px_4px_0px_#2b2d42] transform -rotate-2">
                     Hello World! 👋
                 </div>
-                <h1 class="text-6xl md:text-8xl font-bold text-lofi-dark mb-2 font-hand">
-                    Khalil Itto
-                </h1>
+                <h1 class="text-6xl md:text-8xl font-bold text-lofi-dark mb-2 font-hand">Khalil Itto</h1>
                 <h2 class="text-2xl md:text-4xl text-lofi-text mb-6 font-hand">
                     I build stuff on the <span class="text-lofi-accent underline decoration-wavy decoration-2">internet</span>.
                 </h2>
+                <p class="text-xl text-lofi-dark mb-4 max-w-2xl leading-relaxed font-bold font-hand italic bg-yellow-100 inline-block px-2">
+                    "I turn coffee into code and complex tech topics into easy-to-understand content."
+                </p>
                 <p class="text-lg text-lofi-dark mb-10 max-w-xl leading-relaxed font-medium">
-                    Web Developer, Graphic Designer, and IT Educator. I simplify complex tech for everyone, one pixel at a time. Grab a coffee ☕ and look around.
+                    Web Developer, Graphic Designer, and Tech Creator with millions of views. I simplify complex workflows for the Arabic-speaking tech community.
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="#contact" class="lofi-btn px-8 py-3 rounded-lg font-bold text-lg font-hand">
-                        Say Hi!
-                    </a>
-                    <a href="https://www.youtube.com/@khalildroid" target="_blank" class="px-8 py-3 bg-white text-lofi-dark font-bold rounded-lg border-2 border-lofi-dark hover:bg-gray-100 transition-all shadow-[4px_4px_0px_#2b2d42] font-hand flex items-center gap-2">
+                    <a href="#contact" class="lofi-btn px-6 py-3 rounded-lg font-bold text-lg font-hand">Say Hi!</a>
+                    <a href="https://www.youtube.com/@khalildroid" target="_blank" class="px-6 py-3 bg-white text-lofi-dark font-bold rounded-lg border-2 border-lofi-dark hover:bg-gray-100 transition-all shadow-[4px_4px_0px_#2b2d42] font-hand flex items-center gap-2">
                         <i class="fab fa-youtube text-red-500"></i> My Channel
+                    </a>
+                    <a href="Khalil Itto - Q4 Media Kit.pdf" target="_blank" class="px-6 py-3 bg-lofi-dark text-white font-bold rounded-lg border-2 border-lofi-dark hover:bg-lofi-pink transition-all shadow-[4px_4px_0px_#ff9f1c] font-hand flex items-center gap-2">
+                        <i class="fas fa-file-pdf"></i> Media Kit
                     </a>
                 </div>
             </div>
         </section>
 
+        <!-- About Section -->
         <section id="about" class="mb-20 scroll-mt-10">
             <h2 class="text-4xl font-hand font-bold text-lofi-dark mb-8 flex items-center gap-3">
                 <i class="fas fa-star text-lofi-accent"></i> About Me
             </h2>
-            
             <div class="lofi-card p-8 bg-[#fffefc] relative overflow-hidden">
                 <div class="absolute -top-6 -right-6 w-24 h-24 bg-lofi-green rounded-full opacity-20"></div>
                 <div class="flex flex-col md:flex-row gap-10 items-center">
                     <div class="flex-1 space-y-4 text-lg text-lofi-dark leading-relaxed">
-                        <p>
-                            Hey there! I'm <strong>Khalil</strong>. I'm a 23-year-old tech enthusiast based in <span class="bg-lofi-brown/20 px-1 rounded">Marrakesh, Morocco</span>.
-                        </p>
-                        <p>
-                            Since 2017, I've been on a mission to make technology less scary. Whether I'm teaching English, explaining Linux on my YouTube channel ("khalil droid"), or creating graphics, I love <strong>sharing knowledge</strong>.
-                        </p>
-                        <p>
-                            I'm also a bit of an Android nerd (love me some custom ROMs!) and currently leveling up my skills at FLSH University.
-                        </p>
+                        <p>Hey there! I'm <strong>Khalil</strong>. I'm a 24-year-old multi-skilled professional based in <span class="bg-lofi-brown/20 px-1 rounded">Ait Ourir, Marrakesh, Morocco</span>.</p>
+                        <p>Since 2017, I've been bridging the gap between Education, Design, and Technology. Whether I'm teaching English, managing self-hosted server environments, or creating tutorials on my YouTube channel ("khalil droid"), I love breaking down complex technical workflows for an active Arabic and Moroccan Darija-speaking audience.</p>
+                        <p>I'm heavily involved in Linux systems, Home Lab configurations (Docker, Proxmox), and Android custom ROMs.</p>
                     </div>
                     <div class="w-full md:w-1/3 flex justify-center">
                         <div class="polaroid transform rotate-3 bg-white p-4 shadow-lg border border-gray-200 max-w-xs">
                              <div class="tape"></div>
-                            <img src="khalidr.jpg" alt="Portrait" class="aspect-square object-cover mb-4 border border-gray-100" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/d4a373?text=Profile+Pic';">
+                            <img src="khalidr.jpg" alt="Portrait" class="aspect-square object-cover mb-4 border border-gray-100" onerror="this.src='https://placehold.co/400x400/fffefc/d4a373?text=Photo';">
                             <p class="font-hand text-center text-xl text-gray-600">Me! :)</p>
                         </div>
                     </div>
@@ -319,6 +284,65 @@
             </div>
         </section>
 
+        <!-- Creator & Sponsorships Section -->
+        <section id="creator" class="mb-20 scroll-mt-10">
+            <h2 class="text-4xl font-hand font-bold text-lofi-dark mb-8 flex items-center gap-3">
+                <i class="fas fa-bullhorn text-lofi-pink"></i> Creator & Partnerships
+            </h2>
+            
+            <div class="lofi-card p-8 bg-white mb-8 border-lofi-pink border-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <div class="stat-box p-4 border-2 border-lofi-dark rounded-xl text-center bg-pink-50 shadow-[4px_4px_0px_#2b2d42]">
+                        <i class="fab fa-instagram text-3xl text-pink-600 mb-2"></i>
+                        <h3 class="text-3xl font-bold font-hand">3.7M+</h3>
+                        <p class="text-sm font-bold text-gray-600">IG Views (60 Days)</p>
+                    </div>
+                    <div class="stat-box p-4 border-2 border-lofi-dark rounded-xl text-center bg-blue-50 shadow-[4px_4px_0px_#2b2d42]">
+                        <i class="fab fa-facebook text-3xl text-blue-600 mb-2"></i>
+                        <h3 class="text-3xl font-bold font-hand">3.3M+</h3>
+                        <p class="text-sm font-bold text-gray-600">FB Views (90 Days)</p>
+                    </div>
+                    <div class="stat-box p-4 border-2 border-lofi-dark rounded-xl text-center bg-gray-50 shadow-[4px_4px_0px_#2b2d42]">
+                        <i class="fab fa-tiktok text-3xl text-black mb-2"></i>
+                        <h3 class="text-3xl font-bold font-hand">1.2M+</h3>
+                        <p class="text-sm font-bold text-gray-600">TikTok Views</p>
+                    </div>
+                    <div class="stat-box p-4 border-2 border-lofi-dark rounded-xl text-center bg-red-50 shadow-[4px_4px_0px_#2b2d42]">
+                        <i class="fab fa-youtube text-3xl text-red-600 mb-2"></i>
+                        <h3 class="text-3xl font-bold font-hand">41.7K+</h3>
+                        <p class="text-sm font-bold text-gray-600">YT Views (28 Days)</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-2xl font-hand font-bold mb-4 border-b-2 border-dashed border-gray-300 pb-2">Content Pillars</h3>
+                        <ul class="space-y-3 font-medium">
+                            <li class="flex items-start gap-2"><i class="fas fa-linux text-lofi-accent mt-1"></i> <span><strong>Linux & Desktop:</strong> Arch, CachyOS, setup guides & terminal tools.</span></li>
+                            <li class="flex items-start gap-2"><i class="fas fa-server text-lofi-accent mt-1"></i> <span><strong>Home Lab & Self-Hosting:</strong> Docker, Proxmox, NAS servers, networking.</span></li>
+                            <li class="flex items-start gap-2"><i class="fab fa-android text-lofi-accent mt-1"></i> <span><strong>Android Customization:</strong> Custom ROMs, flashing, rooting, and OS optimization.</span></li>
+                            <li class="flex items-start gap-2"><i class="fas fa-network-wired text-lofi-accent mt-1"></i> <span><strong>Hardware & Networking:</strong> Translating complex gear into practical steps.</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-hand font-bold mb-4 border-b-2 border-dashed border-gray-300 pb-2">Partnership Opportunities</h3>
+                        <ul class="space-y-3 font-medium">
+                            <li class="flex items-start gap-2"><i class="fas fa-box-open text-lofi-pink mt-1"></i> <span><strong>Dedicated Product Reviews:</strong> Hands-on, practical integration of your software/hardware into my workflow.</span></li>
+                            <li class="flex items-start gap-2"><i class="fas fa-ad text-lofi-pink mt-1"></i> <span><strong>Paid Sponsorships:</strong> 30-60 second high-impact brand integrations in tutorials/Reels.</span></li>
+                            <li class="flex items-start gap-2"><i class="fas fa-handshake text-lofi-pink mt-1"></i> <span><strong>Ambassador Campaigns:</strong> 30-day sustained campaigns for high-value tech building audience trust.</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <a href="Khalil Itto - Q4 Media Kit.pdf" target="_blank" class="inline-block px-8 py-4 bg-lofi-pink text-white font-bold rounded-lg border-2 border-lofi-dark hover:bg-lofi-dark transition-all shadow-[4px_4px_0px_#2b2d42] font-hand text-xl">
+                        <i class="fas fa-download mr-2"></i> Download Full Media Kit (PDF)
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
         <section id="skills" class="mb-20 scroll-mt-10">
             <h2 class="text-4xl font-hand font-bold text-lofi-dark mb-8 flex items-center gap-3">
                 <i class="fas fa-tools text-lofi-green"></i> My Toolkit
@@ -329,18 +353,19 @@
                     <h3 class="text-2xl font-hand font-bold mb-4 border-b-2 border-dashed border-gray-300 pb-2">Technical & IT</h3>
                     <div class="flex flex-wrap gap-2 mb-6">
                         <span class="skill-tag px-3 py-1 bg-lofi-bg border-2 border-lofi-dark rounded-lg font-bold text-sm shadow-[2px_2px_0px_#d4a373]">Web Dev</span>
-                        <span class="skill-tag px-3 py-1 bg-lofi-bg border-2 border-lofi-dark rounded-lg font-bold text-sm shadow-[2px_2px_0px_#d4a373]">Linux</span>
+                        <span class="skill-tag px-3 py-1 bg-lofi-bg border-2 border-lofi-dark rounded-lg font-bold text-sm shadow-[2px_2px_0px_#d4a373]">Linux / Arch</span>
                         <span class="skill-tag px-3 py-1 bg-lofi-bg border-2 border-lofi-dark rounded-lg font-bold text-sm shadow-[2px_2px_0px_#d4a373]">Android ROMs</span>
                         <span class="skill-tag px-3 py-1 bg-lofi-bg border-2 border-lofi-dark rounded-lg font-bold text-sm shadow-[2px_2px_0px_#aacc00]">Virtualization</span>
-                        <span class="skill-tag px-3 py-1 bg-lofi-bg border-2 border-lofi-dark rounded-lg font-bold text-sm shadow-[2px_2px_0px_#aacc00]">IT Nerd</span>
+                        <span class="skill-tag px-3 py-1 bg-lofi-bg border-2 border-lofi-dark rounded-lg font-bold text-sm shadow-[2px_2px_0px_#aacc00]">Networking / NAS</span>
+                        <span class="skill-tag px-3 py-1 bg-lofi-bg border-2 border-lofi-dark rounded-lg font-bold text-sm shadow-[2px_2px_0px_#aacc00]">Docker & Proxmox</span>
                     </div>
 
                     <h3 class="text-2xl font-hand font-bold mb-4 border-b-2 border-dashed border-gray-300 pb-2">Design & Creative</h3>
                     <div class="flex flex-wrap gap-2 mb-6">
                         <span class="skill-tag px-3 py-1 bg-lofi-bg border-2 border-lofi-dark rounded-lg font-bold text-sm shadow-[2px_2px_0px_#ff9f1c]">Graphic Design</span>
-                        <span class="skill-tag px-3 py-1 bg-lofi-bg border-2 border-lofi-dark rounded-lg font-bold text-sm shadow-[2px_2px_0px_#ff9f1c]">Photo Retouching</span>
-                        <span class="skill-tag px-3 py-1 bg-lofi-bg border-2 border-lofi-dark rounded-lg font-bold text-sm shadow-[2px_2px_0px_#ff9f1c]">Design Thinking</span>
                         <span class="skill-tag px-3 py-1 bg-lofi-bg border-2 border-lofi-dark rounded-lg font-bold text-sm shadow-[2px_2px_0px_#ff9f1c]">Content Creation</span>
+                        <span class="skill-tag px-3 py-1 bg-lofi-bg border-2 border-lofi-dark rounded-lg font-bold text-sm shadow-[2px_2px_0px_#ff9f1c]">Design Thinking</span>
+                        <span class="skill-tag px-3 py-1 bg-lofi-bg border-2 border-lofi-dark rounded-lg font-bold text-sm shadow-[2px_2px_0px_#ff9f1c]">Video Editing</span>
                     </div>
 
                     <h3 class="text-2xl font-hand font-bold mb-4 border-b-2 border-dashed border-gray-300 pb-2">Soft Skills</h3>
@@ -356,30 +381,21 @@
                     <h3 class="text-2xl font-hand font-bold mb-6 border-b-2 border-dashed border-gray-300 pb-2">Languages</h3>
                     <div class="space-y-6 font-hand text-lg">
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span>Arabic</span>
-                                <span>Native</span>
-                            </div>
+                            <div class="flex justify-between mb-1"><span>Arabic</span><span>Native</span></div>
                             <div class="w-full bg-gray-200 h-4 rounded-full border-2 border-lofi-dark overflow-hidden">
                                 <div class="bg-lofi-accent h-full border-r-2 border-lofi-dark lang-bar-fill" data-width="100%"></div>
                             </div>
                         </div>
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span>English</span>
-                                <span>Fluent (C2)</span>
-                            </div>
+                            <div class="flex justify-between mb-1"><span>English</span><span>Fluent (C2 EF SET)</span></div>
                             <div class="w-full bg-gray-200 h-4 rounded-full border-2 border-lofi-dark overflow-hidden">
-                                <div class="bg-lofi-green h-full border-r-2 border-lofi-dark lang-bar-fill" data-width="90%"></div>
+                                <div class="bg-lofi-green h-full border-r-2 border-lofi-dark lang-bar-fill" data-width="95%"></div>
                             </div>
                         </div>
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span>Tamazight</span>
-                                <span>Native</span>
-                            </div>
+                            <div class="flex justify-between mb-1"><span>Tamazight</span><span>Native</span></div>
                             <div class="w-full bg-gray-200 h-4 rounded-full border-2 border-lofi-dark overflow-hidden">
-                                <div class="bg-lofi-brown h-full border-r-2 border-lofi-dark lang-bar-fill" data-width="75%"></div>
+                                <div class="bg-lofi-brown h-full border-r-2 border-lofi-dark lang-bar-fill" data-width="85%"></div>
                             </div>
                         </div>
                     </div>
@@ -387,49 +403,56 @@
             </div>
         </section>
 
+        <!-- Experience Timeline -->
         <section id="experience" class="mb-20 scroll-mt-10">
             <h2 class="text-4xl font-hand font-bold text-lofi-dark mb-8 flex items-center gap-3">
-                <i class="fas fa-history text-lofi-brown"></i> Timeline
+                <i class="fas fa-history text-lofi-brown"></i> Journey
             </h2>
 
-            <div class="relative border-l-4 border-dotted border-lofi-dark ml-4 md:ml-8 space-y-12 py-4">
-                
-                <div class="timeline-item relative pl-8 md:pl-10">
-                    <div class="timeline-pin absolute -left-[14px] top-2 w-6 h-6 bg-lofi-accent rounded-full border-4 border-lofi-bg shadow-md transition-transform duration-300 z-10"></div>
-                    <div class="lofi-card p-6 bg-white relative mt-[-10px]">
-                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-red-500 border border-black shadow-sm z-20"></div>
+            <div class="relative border-l-4 border-dotted border-lofi-dark ml-4 md:ml-10 space-y-12 pl-8 md:pl-12 py-4">
+                <div class="timeline-item relative">
+                    <div class="timeline-pin absolute -left-[46px] md:-left-[62px] top-0 w-8 h-8 bg-lofi-pink rounded-full border-4 border-white shadow-md transition-transform duration-300 z-10"></div>
+                    <div class="lofi-card p-6 bg-white relative">
+                        <span class="inline-block bg-lofi-bg text-xs font-bold px-2 py-1 rounded mb-2 border border-lofi-dark">2021 - Present</span>
+                        <h3 class="text-xl font-bold text-lofi-dark">Content Creator & Tech Reviewer</h3>
+                        <p class="text-sm text-gray-500 mb-2 italic">YouTube, Instagram, Facebook</p>
+                        <p class="text-gray-700">Scaling technical education across platforms. Reviewing hardware, demonstrating Linux setups, and building a massive Arabic-speaking tech community.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item relative">
+                    <div class="timeline-pin absolute -left-[46px] md:-left-[62px] top-0 w-8 h-8 bg-lofi-accent rounded-full border-4 border-white shadow-md transition-transform duration-300 z-10"></div>
+                    <div class="lofi-card p-6 bg-white relative">
                         <span class="inline-block bg-lofi-bg text-xs font-bold px-2 py-1 rounded mb-2 border border-lofi-dark">2019 - Present</span>
                         <h3 class="text-xl font-bold text-lofi-dark">Teaching English & IT</h3>
                         <p class="text-sm text-gray-500 mb-2 italic">Private Centers</p>
-                        <p class="text-gray-700">Helping students level up their English and tech skills in Ait Ourir. It's been an amazing journey seeing them grow!</p>
+                        <p class="text-gray-700">Instructing new recruits in English communication and basic terminal/IT usage in Ait Ourir.</p>
                     </div>
                 </div>
                 
-                <div class="timeline-item relative pl-8 md:pl-10">
-                    <div class="timeline-pin absolute -left-[14px] top-2 w-6 h-6 bg-lofi-green rounded-full border-4 border-lofi-bg shadow-md transition-transform duration-300 z-10"></div>
-                    <div class="lofi-card p-6 bg-white relative mt-[-10px]">
-                         <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-blue-500 border border-black shadow-sm z-20"></div>
+                <div class="timeline-item relative">
+                    <div class="timeline-pin absolute -left-[46px] md:-left-[62px] top-0 w-8 h-8 bg-lofi-green rounded-full border-4 border-white shadow-md transition-transform duration-300 z-10"></div>
+                    <div class="lofi-card p-6 bg-white relative">
                         <span class="inline-block bg-lofi-bg text-xs font-bold px-2 py-1 rounded mb-2 border border-lofi-dark">2021 - Present</span>
                         <h3 class="text-xl font-bold text-lofi-dark">Graphic Design</h3>
                         <p class="text-sm text-gray-500 mb-2 italic">Freelance / Centers</p>
-                        <p class="text-gray-700">Making things look good! Designed posters, logos, and social media content for various local centers.</p>
+                        <p class="text-gray-700">Creating visual designs, posters, and managing comms channels for various organizations.</p>
                     </div>
                 </div>
 
-                 <div class="timeline-item relative pl-8 md:pl-10">
-                    <div class="timeline-pin absolute -left-[14px] top-2 w-6 h-6 bg-lofi-brown rounded-full border-4 border-lofi-bg shadow-md transition-transform duration-300 z-10"></div>
-                    <div class="lofi-card p-6 bg-white relative mt-[-10px]">
-                         <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-yellow-500 border border-black shadow-sm z-20"></div>
+                 <div class="timeline-item relative">
+                    <div class="timeline-pin absolute -left-[46px] md:-left-[62px] top-0 w-8 h-8 bg-lofi-brown rounded-full border-4 border-white shadow-md transition-transform duration-300 z-10"></div>
+                    <div class="lofi-card p-6 bg-white relative">
                         <span class="inline-block bg-lofi-bg text-xs font-bold px-2 py-1 rounded mb-2 border border-lofi-dark">Current</span>
                         <h3 class="text-xl font-bold text-lofi-dark">University Student</h3>
                         <p class="text-sm text-gray-500 mb-2 italic">FLSH University</p>
-                        <p class="text-gray-700">Currently studying hard (BAC+2). Always learning!</p>
+                        <p class="text-gray-700">Acquiring advanced knowledge database (BAC+1). Always learning!</p>
                     </div>
                 </div>
-
             </div>
         </section>
 
+        <!-- Certificates Wall of Fame -->
         <section id="certificates" class="mb-20 scroll-mt-10">
             <h2 class="text-4xl font-hand font-bold text-lofi-dark mb-8 flex items-center gap-3">
                 <i class="fas fa-certificate text-yellow-500"></i> Wall of Fame
@@ -439,119 +462,74 @@
                 <!-- Academic -->
                 <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
                     <i class="fas fa-graduation-cap text-lofi-accent text-2xl"></i>
-                    <div>
-                        <h4 class="font-bold text-lofi-dark font-hand text-lg">DEUG</h4>
-                        <p class="text-xs text-gray-500 font-sans">English Studies</p>
-                    </div>
+                    <div><h4 class="font-bold text-lofi-dark font-hand text-lg">DEUG</h4><p class="text-xs text-gray-500 font-sans">English Studies</p></div>
                 </div>
                 <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
                     <i class="fas fa-graduation-cap text-lofi-accent text-2xl"></i>
-                    <div>
-                        <h4 class="font-bold text-lofi-dark font-hand text-lg">Baccalauréat (x2)</h4>
-                        <p class="text-xs text-gray-500 font-sans">Sciences & Lettres</p>
-                    </div>
+                    <div><h4 class="font-bold text-lofi-dark font-hand text-lg">Baccalauréat (x2)</h4><p class="text-xs text-gray-500 font-sans">Sciences & Lettres</p></div>
                 </div>
                 <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
                     <i class="fas fa-language text-lofi-accent text-2xl"></i>
-                    <div>
-                        <h4 class="font-bold text-lofi-dark font-hand text-lg">EF SET C2</h4>
-                        <p class="text-xs text-gray-500 font-sans">English Proficiency</p>
-                    </div>
+                    <div><h4 class="font-bold text-lofi-dark font-hand text-lg">EF SET C2</h4><p class="text-xs text-gray-500 font-sans">English Proficient</p></div>
                 </div>
 
                 <!-- IT / Tech -->
                 <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
                     <i class="fas fa-network-wired text-lofi-accent text-2xl"></i>
-                    <div>
-                        <h4 class="font-bold text-lofi-dark font-hand text-lg">CCNA</h4>
-                        <p class="text-xs text-gray-500 font-sans">Cisco / Cybrary</p>
-                    </div>
+                    <div><h4 class="font-bold text-lofi-dark font-hand text-lg">CCNA</h4><p class="text-xs text-gray-500 font-sans">Cisco / Cybrary</p></div>
                 </div>
                 <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
                     <i class="fab fa-microsoft text-lofi-accent text-2xl"></i>
-                    <div>
-                        <h4 class="font-bold text-lofi-dark font-hand text-lg">MS-900</h4>
-                        <p class="text-xs text-gray-500 font-sans">M365 Fundamentals</p>
-                    </div>
+                    <div><h4 class="font-bold text-lofi-dark font-hand text-lg">MS-900</h4><p class="text-xs text-gray-500 font-sans">M365 Fundamentals</p></div>
                 </div>
                 <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
                     <i class="fas fa-database text-lofi-accent text-2xl"></i>
-                    <div>
-                        <h4 class="font-bold text-lofi-dark font-hand text-lg">Oracle Cloud AI</h4>
-                        <p class="text-xs text-gray-500 font-sans">Foundations Associate</p>
-                    </div>
+                    <div><h4 class="font-bold text-lofi-dark font-hand text-lg">Oracle Cloud AI</h4><p class="text-xs text-gray-500 font-sans">Foundations Associate</p></div>
                 </div>
-                 <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
+                <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
                     <i class="fas fa-shield-alt text-lofi-accent text-2xl"></i>
-                    <div>
-                        <h4 class="font-bold text-lofi-dark font-hand text-lg">Network Security</h4>
-                        <p class="text-xs text-gray-500 font-sans">Mindluster</p>
-                    </div>
+                    <div><h4 class="font-bold text-lofi-dark font-hand text-lg">Network Security</h4><p class="text-xs text-gray-500 font-sans">Mindluster</p></div>
                 </div>
-                 <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
+                <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
                     <i class="fas fa-laptop-code text-lofi-accent text-2xl"></i>
-                    <div>
-                        <h4 class="font-bold text-lofi-dark font-hand text-lg">Basic IT</h4>
-                        <p class="text-xs text-gray-500 font-sans">Dell / EFE</p>
-                    </div>
+                    <div><h4 class="font-bold text-lofi-dark font-hand text-lg">Basic IT</h4><p class="text-xs text-gray-500 font-sans">Dell / EFE</p></div>
                 </div>
 
                 <!-- Entrepreneurship & Training -->
-                 <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
+                <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
                     <i class="fas fa-users text-lofi-accent text-2xl"></i>
-                    <div>
-                        <h4 class="font-bold text-lofi-dark font-hand text-lg">CAEDEL / NDI</h4>
-                        <p class="text-xs text-gray-500 font-sans">Entrepreneurship</p>
-                    </div>
+                    <div><h4 class="font-bold text-lofi-dark font-hand text-lg">CAEDEL / NDI</h4><p class="text-xs text-gray-500 font-sans">Entrepreneurship</p></div>
                 </div>
                 <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
                     <i class="fas fa-chalkboard-teacher text-lofi-accent text-2xl"></i>
-                    <div>
-                        <h4 class="font-bold text-lofi-dark font-hand text-lg">ASAS Training</h4>
-                        <p class="text-xs text-gray-500 font-sans">Youth Ministry</p>
-                    </div>
+                    <div><h4 class="font-bold text-lofi-dark font-hand text-lg">ASAS Training</h4><p class="text-xs text-gray-500 font-sans">Youth Ministry</p></div>
                 </div>
                 <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
                     <i class="fas fa-campground text-lofi-accent text-2xl"></i>
-                    <div>
-                        <h4 class="font-bold text-lofi-dark font-hand text-lg">Camp Directors</h4>
-                        <p class="text-xs text-gray-500 font-sans">Level 1 Training</p>
-                    </div>
+                    <div><h4 class="font-bold text-lofi-dark font-hand text-lg">Camp Directors</h4><p class="text-xs text-gray-500 font-sans">Level 1 Training</p></div>
                 </div>
 
                 <!-- Community & Culture -->
-                 <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
+                <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
                     <i class="fas fa-hands-helping text-lofi-accent text-2xl"></i>
-                    <div>
-                        <h4 class="font-bold text-lofi-dark font-hand text-lg">Community Impact</h4>
-                        <p class="text-xs text-gray-500 font-sans">Toubkal / Women's Center</p>
-                    </div>
+                    <div><h4 class="font-bold text-lofi-dark font-hand text-lg">Community Impact</h4><p class="text-xs text-gray-500 font-sans">Toubkal / Women's Center</p></div>
                 </div>
                 <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
                     <i class="fas fa-theater-masks text-lofi-accent text-2xl"></i>
-                    <div>
-                        <h4 class="font-bold text-lofi-dark font-hand text-lg">Cultural Arts</h4>
-                        <p class="text-xs text-gray-500 font-sans">Rifa / Dar Chabab</p>
-                    </div>
+                    <div><h4 class="font-bold text-lofi-dark font-hand text-lg">Cultural Arts</h4><p class="text-xs text-gray-500 font-sans">Rifa / Dar Chabab</p></div>
                 </div>
                 <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
                     <i class="fas fa-chess-knight text-lofi-accent text-2xl"></i>
-                    <div>
-                        <h4 class="font-bold text-lofi-dark font-hand text-lg">National Chess</h4>
-                        <p class="text-xs text-gray-500 font-sans">Regional Qualifier</p>
-                    </div>
+                    <div><h4 class="font-bold text-lofi-dark font-hand text-lg">National Chess</h4><p class="text-xs text-gray-500 font-sans">Regional Qualifier</p></div>
                 </div>
                 <div class="cert-card bg-white p-4 rounded-lg border-2 border-lofi-dark shadow-[4px_4px_0px_#2b2d42] flex items-center gap-3">
                     <i class="fas fa-user-ninja text-lofi-accent text-2xl"></i>
-                    <div>
-                        <h4 class="font-bold text-lofi-dark font-hand text-lg">Karate Kata</h4>
-                        <p class="text-xs text-gray-500 font-sans">AS.A.AO Event Org</p>
-                    </div>
+                    <div><h4 class="font-bold text-lofi-dark font-hand text-lg">Karate Kata</h4><p class="text-xs text-gray-500 font-sans">AS.A.AO Event Org</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- Gallery Section (Polaroid Style, 19 UNIQUE IMAGES NO DUPLICATES) -->
+        <!-- Gallery Section (Polaroid Style - EXACT GITHUB FILENAMES) -->
         <section id="gallery" class="mb-20 scroll-mt-10">
             <h2 class="text-4xl font-hand font-bold text-lofi-dark mb-12 flex items-center gap-3">
                 <i class="fas fa-images text-purple-500"></i> Photo Dump
@@ -562,86 +540,87 @@
                 <!-- Group 1: Academics & IT -->
                 <div class="polaroid" style="--rotation: -2deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775635_w.jpg" alt="DEUG" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775635_w.jpg" alt="DEUG" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 <div class="polaroid" style="--rotation: 3deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775633_w.jpg" alt="Baccalauréat Sciences" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775633_w.jpg" alt="Baccalauréat Sciences" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 <div class="polaroid" style="--rotation: -1deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775630_w.jpg" alt="Baccalauréat Lettres" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775630_w.jpg" alt="Baccalauréat Lettres" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 <div class="polaroid" style="--rotation: 2deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775636_w.jpg" alt="Microsoft MS-900" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775634_w.jpg" alt="Oracle AI" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 <div class="polaroid" style="--rotation: -3deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775634_w.jpg" alt="Oracle AI" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775637_w.jpg" alt="Network Security" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 <div class="polaroid" style="--rotation: 1deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775637_w.jpg" alt="Network Security" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775632_w.jpg" alt="Espace Associatif Feminin" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 <div class="polaroid" style="--rotation: -2deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775638_w.jpg" alt="CAEDEL" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775647_w.jpg" alt="CCNA" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 <div class="polaroid" style="--rotation: 4deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775631_w.jpg" alt="RIFAA Arts" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775645_w.jpg" alt="Dar Chabab" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
+                
+                <!-- Group 2: The remaining files matching github exactly -->
                 <div class="polaroid" style="--rotation: -1deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775632_w.jpg" alt="Espace Associatif Feminin" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775648_w.jpg" alt="EF SET" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
-
-                <!-- Group 2: The remaining variants to complete the set without duplicates -->
                 <div class="polaroid" style="--rotation: 2deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775647_w.jpg" alt="CCNA" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775636_w.jpg" alt="MS-900" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 <div class="polaroid" style="--rotation: -3deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775648_w.jpg" alt="EF SET" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775638_w.jpg" alt="CAEDEL" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 <div class="polaroid" style="--rotation: 3deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775643_w.jpg" alt="NDI" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775631_w.jpg" alt="RIFAA Arts" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 <div class="polaroid" style="--rotation: -1deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775644_w.jpg" alt="Toubkal" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775643_w.jpg" alt="NDI" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 <div class="polaroid" style="--rotation: 2deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775645_w.jpg" alt="Dar Chabab" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775639_w.jpg" alt="ASAS" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 <div class="polaroid" style="--rotation: -2deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775646_w.jpg" alt="Karate" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775646_w.jpg" alt="Karate" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 <div class="polaroid" style="--rotation: 1deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775639_w.jpg" alt="ASAS" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775640_w.jpg" alt="Chess" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 <div class="polaroid" style="--rotation: -3deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775640_w.jpg" alt="Chess" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775641_w.jpg" alt="Basic IT" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 <div class="polaroid" style="--rotation: 3deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775641_w.jpg" alt="Basic IT" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775642_w.jpg" alt="Camp Directors" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 <div class="polaroid" style="--rotation: -1deg;">
                      <div class="tape"></div>
-                    <img src="photo_5967520886866775642_w.jpg" alt="Camp Directors" onerror="this.onerror=null; this.src='https://placehold.co/400x400/fffefc/ff9f1c?text=Needs+Local+File';">
+                    <img src="photo_5967520886866775644_w.jpg" alt="Toubkal Appreciation" onerror="this.src='https://placehold.co/400x300/fffefc/ff9f1c?text=Needs+Local+File';">
                 </div>
                 
             </div>
         </section>
 
+        <!-- Contact Section -->
         <section id="contact" class="mb-10 scroll-mt-10">
             <div class="lofi-card bg-lofi-dark text-white p-10 text-center relative overflow-hidden">
                 <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 20px 20px;"></div>
@@ -655,20 +634,16 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <i class="fas fa-envelope text-lofi-accent"></i>
-                        <span class="break-all">khalil2itto@gmail.com</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-phone text-lofi-accent"></i>
-                        <span></span>
+                        <span class="break-all">khalili2tto@gmail.com</span>
                     </div>
                 </div>
 
                 <div class="flex justify-center gap-4 relative z-10">
                      <a href="https://www.facebook.com/khalildroid/" target="_blank" class="w-10 h-10 flex items-center justify-center bg-white text-lofi-dark rounded-full hover:bg-lofi-accent hover:text-white transition-all transform hover:scale-110"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/khalil.itto/" target="_blank" class="w-10 h-10 flex items-center justify-center bg-white text-lofi-dark rounded-full hover:bg-lofi-accent hover:text-white transition-all transform hover:scale-110"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.youtube.com/@khalildroid" target="_blank" class="w-10 h-10 flex items-center justify-center bg-white text-lofi-dark rounded-full hover:bg-lofi-accent hover:text-white transition-all transform hover:scale-110"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/khalil.itto/" target="_blank" class="w-10 h-10 flex items-center justify-center bg-white text-lofi-dark rounded-full hover:bg-lofi-pink hover:text-white transition-all transform hover:scale-110"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@khalildroid" target="_blank" class="w-10 h-10 flex items-center justify-center bg-white text-lofi-dark rounded-full hover:bg-red-500 hover:text-white transition-all transform hover:scale-110"><i class="fab fa-youtube"></i></a>
                     <a href="https://github.com/khalildroid" target="_blank" class="w-10 h-10 flex items-center justify-center bg-white text-lofi-dark rounded-full hover:bg-lofi-accent hover:text-white transition-all transform hover:scale-110"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/khalil-itto" target="_blank" class="w-10 h-10 flex items-center justify-center bg-white text-lofi-dark rounded-full hover:bg-lofi-accent hover:text-white transition-all transform hover:scale-110"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.linkedin.com/in/khalil-itto" target="_blank" class="w-10 h-10 flex items-center justify-center bg-white text-lofi-dark rounded-full hover:bg-blue-600 hover:text-white transition-all transform hover:scale-110"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </section>
@@ -726,9 +701,7 @@
         galleryItems.forEach(img => {
             img.addEventListener('click', (e) => {
                 e.stopPropagation(); 
-                
-                // Do not open lightbox for placeholder missing images
-                if(img.src.includes('placehold.co')) return;
+                if(img.src.includes('placehold.co')) return; // ignore missing local files
 
                 lightboxImg.src = img.src;
                 lightbox.classList.remove('hidden');
